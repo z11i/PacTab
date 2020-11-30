@@ -1,0 +1,17 @@
+{
+    "parserOptions": {
+        "ecmaVersion": 2020
+    },
+    "env": {
+        "browser": true,
+        "es6": true,
+        "webextensions": true
+    },
+    "extends": [
+        "airbnb"
+    ],
+    "ignorePatterns": [
+        "node_modules",
+        "**/*.bundle.js"
+    ]
+}

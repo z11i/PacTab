@@ -1,0 +1,20 @@
+{
+    "compilerOptions": {
+        "allowJs": true,
+        "alwaysStrict": true,
+        "esModuleInterop": true,
+        "importHelpers": true,
+        "module": "commonjs",
+        "newLine": "lf",
+        "noEmitHelpers": true,
+        "noImplicitAny": true,
+        "noImplicitReturns": true,
+        "noUnusedLocals": true,
+        "outDir": "build",
+        "resolveJsonModule": true,
+        "sourceMap": true,
+        "strict": true,
+        "strictNullChecks": true,
+        "target": "es2015"
+    }
+}

@@ -1,0 +1,20 @@
+{
+    "manifest_version": 2,
+    "version": "0.1.0",
+    "name": "SingleTab",
+    "short_name": "SingleTab",
+    "description": "Browser extension to open links in the same tab by URL match patterns.",
+    "homepage_url": "https://github.com/z11i/SingleTab",
+    "permissions": [
+        "tabs",
+        "webRequest",
+        "webRequestBlocking",
+        "storage",
+        "<all_urls>"
+    ],
+    "background": {
+        "scripts": [
+            "js/background.bundle.js"
+        ]
+    }
+}
