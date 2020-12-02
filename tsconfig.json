@@ -4,6 +4,7 @@
         "alwaysStrict": true,
         "esModuleInterop": true,
         "importHelpers": true,
+        "jsx": "react",
         "module": "commonjs",
         "newLine": "lf",
         "noEmitHelpers": true,
@@ -15,6 +16,6 @@
         "sourceMap": true,
         "strict": true,
         "strictNullChecks": true,
-        "target": "es2015"
+        "target": "esnext"
     }
 }

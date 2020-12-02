@@ -1,11 +1,11 @@
 import { browser, WebRequest } from 'webextension-polyfill-ts';
-import { getUrlMatcher } from './matcher';
+import getUrlMatcher from './matcher';
 
 type OnBeforeRequestDetailsType = WebRequest.OnBeforeRequestDetailsType;
 type BlockingResponse = WebRequest.BlockingResponse;
 
 const webRequestListener = async (
-  details: OnBeforeRequestDetailsType
+  details: OnBeforeRequestDetailsType,
 ): Promise<BlockingResponse> => {
   const urlMatcher = await getUrlMatcher(details.url);
   if (!urlMatcher) {
@@ -33,4 +33,4 @@ const webRequestListener = async (
   return { cancel: true };
 };
 
-export { webRequestListener };
+export default webRequestListener;

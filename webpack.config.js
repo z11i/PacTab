@@ -2,18 +2,21 @@
 
 const path = require('path');
 const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const targetBrowser = process.env.TARGET_BROWSER;
 const nodeEnv = process.env.NODE_ENV || 'development';
 
 const srcPath = path.join(__dirname, 'src');
 const destPath = path.join(__dirname, 'extension');
+const viewsPath = path.join(__dirname, 'views');
 
 module.exports = {
   mode: nodeEnv,
   entry: {
-    background: path.join(srcPath, 'background', 'index.ts'),
     manifest: path.join(srcPath, 'manifest.json'),
+    background: path.join(srcPath, 'background', 'index.ts'),
+    options: path.join(srcPath, 'option', 'index.tsx'),
   },
   output: {
     path: path.join(destPath, targetBrowser),
@@ -60,6 +63,13 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production'),
     }),
+    new HtmlWebpackPlugin(({
+      template: path.join(viewsPath, 'options.html'),
+      inject: 'body',
+      chunks: ['options'],
+      hash: true,
+      filename: 'options.html',
+    })),
   ],
   devtool: 'source-map',
   optimization: {

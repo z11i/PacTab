@@ -1,17 +1,46 @@
 {
-    "parserOptions": {
-        "ecmaVersion": 2020
-    },
     "env": {
         "browser": true,
-        "es6": true,
-        "webextensions": true
+        "es2021": true
     },
     "extends": [
-        "airbnb"
+        "airbnb-typescript"
     ],
-    "ignorePatterns": [
-        "node_modules",
-        "**/*.bundle.js"
-    ]
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "project": "./tsconfig.json",
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": 12,
+        "sourceType": "module"
+    },
+    "plugins": [
+        "react",
+        "@typescript-eslint"
+    ],
+    "rules": {
+        "jsx-a11y/label-has-associated-control": [
+            "error",
+            {
+                "required": {
+                    "some": [
+                        "nesting",
+                        "id"
+                    ]
+                }
+            }
+        ],
+        "jsx-a11y/label-has-for": [
+            "error",
+            {
+                "required": {
+                    "some": [
+                        "nesting",
+                        "id"
+                    ]
+                }
+            }
+        ]
+    }
 }

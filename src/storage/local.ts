@@ -1,17 +1,16 @@
 import { browser } from 'webextension-polyfill-ts';
-import { CorelatedURLPattern } from '../url-pattern';
+import { URLRule } from '../rule';
 
-const patternsKey = 'patterns';
+const rulesKey = 'rules';
 
-const storePatterns = (patterns: CorelatedURLPattern[]): Promise<void> => {
-  return browser.storage.local.set({
-    [patternsKey]: patterns,
-  });
+const storeRules = (rules: URLRule[]): Promise<void> => browser.storage.local.set({
+  [rulesKey]: rules,
+});
+
+const fetchRules = async (): Promise<URLRule[]> => {
+  const val = await browser.storage.local.get(rulesKey);
+  const rules = val[rulesKey] as URLRule[];
+  return Promise.resolve(rules || []);
 };
 
-const fetchPatterns = async (): Promise<CorelatedURLPattern[]> => {
-  const val = await browser.storage.local.get(patternsKey);
-  return Promise.resolve(val[patternsKey] as CorelatedURLPattern[]);
-};
-
-export { storePatterns, fetchPatterns };
+export { storeRules, fetchRules };
