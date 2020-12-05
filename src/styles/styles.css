@@ -1,0 +1,16 @@
+/*@import "chrome://global/skin/in-content/common.css"; /* Firefox-only */
+
+:root {
+  max-width: 1200px;
+  margin: auto;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 15% auto;
+}
+
+input[type="text"] {
+  width: 100%;
+}
+

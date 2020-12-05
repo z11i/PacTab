@@ -2,6 +2,8 @@ import * as React from 'react';
 import { blankRule, blankSourceRegex, URLRule } from '../rule';
 import { fetchRules, storeRules } from '../storage/local';
 
+import '../styles/styles.css';
+
 const Options: React.FC = () => {
   const [rulesState, setRulesState] = React.useState<URLRule[]>([]);
 
@@ -78,38 +80,46 @@ const Options: React.FC = () => {
   return (
     <div>
       { rulesState.map((rule) => (
-        <div key={rule.id}>
-          <button type="button" onClick={() => onRemoveTarget(rule.id)}>-</button>
+        <div key={rule.id} className="container">
           <div>
-            <div>Open pages with URL patterns:</div>
+            <button type="button" onClick={() => onRemoveTarget(rule.id)}>-</button>
+          </div>
+          <div>
+            <div>Always use the tab that matches:</div>
             <div>
-              <button type="button" onClick={() => onAddSource(rule.id)}>+</button>
+              <input
+                key={rule.id}
+                type="text"
+                value={rule.targetURLMatcher}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => onUpdateTarget(e, rule.id)}
+              />
+            </div>
+          </div>
+          <div />
+          <div>
+            <div>...when new URLs match the following:</div>
+            <div>
               { rule.sourceRegexes.map(({ id, repr }) => (
-                <div>
-                  <input
-                    key={id}
-                    type="text"
-                    value={repr}
-                    onChange={
+                <div className="container">
+                  <div>
+                    <button type="button" onClick={() => onRemoveSource(rule.id, id)}> - </button>
+                  </div>
+                  <div>
+                    <input
+                      key={id}
+                      type="text"
+                      value={repr}
+                      onChange={
                       (e: React.ChangeEvent<HTMLInputElement>) => {
                         onUpdateSource(e, rule.id, id);
                       }
                     }
-                  />
-                  <button type="button" onClick={() => onRemoveSource(rule.id, id)}> - </button>
+                    />
+                  </div>
                 </div>
               ))}
+              <button type="button" onClick={() => onAddSource(rule.id)}>+</button>
             </div>
-          </div>
-          <div>
-            <div>...in a tab with URL pattern:</div>
-            <input
-              key={rule.id}
-              type="text"
-              placeholder="e.g. ^https:\/\/duckduckgo\.com\/"
-              value={rule.targetUrlMatcher}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => onUpdateTarget(e, rule.id)}
-            />
           </div>
         </div>
       ))}
