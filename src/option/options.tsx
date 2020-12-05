@@ -1,11 +1,14 @@
 import * as React from 'react';
-import { blankRule, blankSourceRegex, URLRule } from '../rule';
+import {
+  blankRule, blankSourceRegex, URLRule, URLRuleErrors, validateRules,
+} from '../rule';
 import { fetchRules, storeRules } from '../storage/local';
 
 import '../styles/styles.css';
 
 const Options: React.FC = () => {
   const [rulesState, setRulesState] = React.useState<URLRule[]>([]);
+  const [errorState, setErrorState] = React.useState<URLRuleErrors>({});
 
   const onAddTarget = () => {
     setRulesState([...rulesState, blankRule()]);
@@ -14,12 +17,18 @@ const Options: React.FC = () => {
     setRulesState(rulesState.filter((_) => _.id !== id));
   };
   const onSaveTarget = async () => {
+    const validateResults = validateRules(rulesState);
+    if (validateResults !== null) {
+      setErrorState(validateResults);
+      return;
+    }
+    setErrorState({});
     await storeRules(rulesState);
   };
   const onUpdateTarget = (event: React.ChangeEvent<HTMLInputElement>, rid: string) => {
     const rules = rulesState.map(
       (rule) => ((rule.id === rid)
-        ? { ...rule, targetUrlMatcher: event.target.value }
+        ? { ...rule, targetURLMatcher: event.target.value }
         : rule),
     );
     setRulesState(rules);
@@ -95,6 +104,9 @@ const Options: React.FC = () => {
               />
             </div>
           </div>
+          {errorState[rule.id]?.error && (
+          <div className="error">{errorState[rule.id].error}</div>
+          )}
           <div />
           <div>
             <div>...when new URLs match the following:</div>
@@ -116,6 +128,11 @@ const Options: React.FC = () => {
                     }
                     />
                   </div>
+                  { errorState[rule.id]?.sourceErrors?.[id] && (
+                  <div className="error">
+                    {errorState[rule.id].sourceErrors?.[id]}
+                  </div>
+                  )}
                 </div>
               ))}
               <button type="button" onClick={() => onAddSource(rule.id)}>+</button>
