@@ -3,6 +3,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 const targetBrowser = process.env.TARGET_BROWSER;
 const nodeEnv = process.env.NODE_ENV || 'development';
@@ -14,7 +15,6 @@ const viewsPath = path.join(__dirname, 'views');
 module.exports = {
   mode: nodeEnv,
   entry: {
-    manifest: path.join(srcPath, 'manifest.json'),
     background: path.join(srcPath, 'background', 'index.ts'),
     options: path.join(srcPath, 'option', 'index.tsx'),
   },
@@ -24,19 +24,6 @@ module.exports = {
   },
   module: {
     rules: [
-      {
-        // prevent webpack handling json with its own loaders,
-        type: 'javascript/auto',
-        test: /manifest\.json$/,
-        use: {
-          loader: 'wext-manifest-loader',
-          options: {
-            // set to false to not use package.json version for manifest
-            usePackageJSONVersion: true,
-          },
-        },
-        exclude: /node_modules/,
-      },
       {
         test: /\.(js|ts)x?$/,
         use: [{
@@ -74,6 +61,11 @@ module.exports = {
       hash: true,
       filename: 'options.html',
     })),
+    new CopyPlugin({
+      patterns: [
+        { from: path.join(srcPath, 'manifest.json'), to: 'manifest.json' },
+      ],
+    }),
   ],
   devtool: 'source-map',
   optimization: {
