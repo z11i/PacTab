@@ -13,13 +13,13 @@ const blankSourceRegex = (): SourceRegex => ({
 
 interface URLRule {
   id: string;
-  targetUrlMatcher: string;
+  targetURLMatcher: string;
   sourceRegexes: SourceRegex[];
 }
 
 const blankRule = (): URLRule => ({
   id: ulid(),
-  targetUrlMatcher: '',
+  targetURLMatcher: '',
   sourceRegexes: [],
 });
 

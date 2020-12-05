@@ -1,5 +1,5 @@
 import { browser, WebRequest } from 'webextension-polyfill-ts';
-import getUrlMatcher from './matcher';
+import getURLMatcher from './matcher';
 
 type OnBeforeRequestDetailsType = WebRequest.OnBeforeRequestDetailsType;
 type BlockingResponse = WebRequest.BlockingResponse;
@@ -7,7 +7,7 @@ type BlockingResponse = WebRequest.BlockingResponse;
 const webRequestListener = async (
   details: OnBeforeRequestDetailsType,
 ): Promise<BlockingResponse> => {
-  const urlMatcher = await getUrlMatcher(details.url);
+  const urlMatcher = await getURLMatcher(details.url);
   if (!urlMatcher) {
     return { cancel: false };
   }
