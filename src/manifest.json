@@ -1,10 +1,10 @@
 {
     "manifest_version": 2,
     "version": "0.1.0",
-    "name": "SingleTab",
-    "short_name": "SingleTab",
+    "name": "PacTab",
+    "short_name": "PacTab",
     "description": "Browser extension to open links in the same tab by URL match patterns.",
-    "homepage_url": "https://github.com/z11i/SingleTab",
+    "homepage_url": "https://github.com/z11i/PacTab",
     "permissions": [
         "tabs",
         "webRequest",
