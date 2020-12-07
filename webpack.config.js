@@ -64,6 +64,7 @@ module.exports = {
     new CopyPlugin({
       patterns: [
         { from: path.join(srcPath, 'manifest.json'), to: 'manifest.json' },
+        { from: path.join(srcPath, 'assets', 'icon.svg'), to: 'icon.svg' },
       ],
     }),
   ],

@@ -1,10 +1,10 @@
 {
   "name": "pactab",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Browser extension to open links in the same tab by URL match patterns. ",
   "scripts": {
     "dev:firefox": "cross-env NODE_ENV=development cross-env TARGET_BROWSER=firefox webpack --watch",
-    "build:firefox": "cross-env NODE_ENV=production cross-env TARGET_BROWSER=firefox webpack"
+    "build:firefox": "cross-env NODE_ENV=production cross-env TARGET_BROWSER=firefox webpack --mode production"
   },
   "repository": {
     "type": "git",
